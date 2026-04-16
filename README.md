@@ -65,3 +65,7 @@ Common phrases:
 
 3. "Is it far from here?"
    → "Je to odsud daleko?"
+
+
+   ![Workflow](assets/images/n8nautomation.png)
+   ![Workflow](assets/images/discordimage.png)
