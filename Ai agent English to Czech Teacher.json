@@ -1,0 +1,400 @@
+{
+  "name": "Ai agent English to Czech Teacher",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Czech language teacher helping beginners learn how to speak naturally in real-life situations.\n\nThe user will ask what they want to say in English.\n\nYour job:\n- Generate a short realistic conversation for that situation\n- Each phrase must be formatted like this:\nEnglish sentence\nCzech translation\n\nRules:\n- Keep it simple and natural (A1–A2 level)\n- Use everyday spoken Czech\n- Give 3–6 phrases max\n- No explanations, فقط phrases\n- Do NOT add extra commentary\n\nUser request:\n {{ $json.message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -3056,
+        1296
+      ],
+      "id": "ffda99ae-c1a4-41bd-8501-c07801f4e609",
+      "name": "AI Agent1",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "google/gemma-3-27b-it:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -3056,
+        1456
+      ],
+      "id": "a9355376-36f5-4df4-a55e-30ad9bfc080d",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "YGgpI3ch5synGSKJ",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "getAll",
+        "guildId": {
+          "__rl": true,
+          "value": "1417921343441080425",
+          "mode": "list",
+          "cachedResultName": "duartems's programming",
+          "cachedResultUrl": "https://discord.com/channels/1417921343441080425"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1493919467158114444",
+          "mode": "list",
+          "cachedResultName": "ai-teacher-cz",
+          "cachedResultUrl": "https://discord.com/channels/1417921343441080425/1493919467158114444"
+        },
+        "limit": 2,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -3552,
+        1296
+      ],
+      "id": "73d6a052-5249-497d-a76a-569106db3b3b",
+      "name": "__CUSTOM_API_CALL__ message",
+      "webhookId": "68354517-5ebf-4ad2-8753-fe5648713246",
+      "credentials": {
+        "discordBotApi": {
+          "id": "4vxz4CXazYV6rRoO",
+          "name": "Discord Bot account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      message: $input.first().json.content\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3344,
+        1296
+      ],
+      "id": "04d3cf06-4aea-4376-8ee9-2d28ac8d74e2",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1417921343441080425",
+          "mode": "list",
+          "cachedResultName": "duartems's programming",
+          "cachedResultUrl": "https://discord.com/channels/1417921343441080425"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1493919467158114444",
+          "mode": "list",
+          "cachedResultName": "ai-teacher-cz",
+          "cachedResultUrl": "https://discord.com/channels/1417921343441080425/1493919467158114444"
+        },
+        "content": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1792,
+        1280
+      ],
+      "id": "beb6b167-ef91-4fa7-a298-73c74a39370e",
+      "name": "Send a message",
+      "webhookId": "c5901037-b268-4520-8d1a-8680737df130",
+      "credentials": {
+        "discordBotApi": {
+          "id": "4vxz4CXazYV6rRoO",
+          "name": "Discord Bot account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -2752,
+        1664
+      ],
+      "id": "3bc040dc-0cf9-49f4-ad39-6b52acec0798",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Czech language teacher helping beginners learn how to speak naturally in real-life situations.\n\nThe user will ask what they want to say in English.\n\nYour job:\n- Generate a short realistic conversation for that situation\n- Each phrase must be formatted like this:\nEnglish sentence\nCzech translation\n\nRules:\n- Keep it simple and natural (A1–A2 level)\n- Use everyday spoken Czech\n- Give 3–6 phrases max\n- No explanations, فقط phrases\n- Do NOT add extra commentary\n\nUser request:\n {{ $json.message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -2544,
+        1664
+      ],
+      "id": "3daee937-0243-4268-9e3d-e05b1a3c253f",
+      "name": "AI Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "google/gemma-3-27b-it:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -2544,
+        1840
+      ],
+      "id": "477a769b-ee99-46a0-9de7-04d2645e81e8",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "kS9Ggs9IvhRFYZ4m",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -2368,
+        2112
+      ],
+      "id": "47d2a3dd-3d0e-473d-8234-f5e6cf6b2edb",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Czech language teacher helping beginners learn how to speak naturally in real-life situations.\n\nThe user will ask what they want to say in English.\n\nYour job:\n- Generate a short realistic conversation for that situation\n- Each phrase must be formatted like this:\nEnglish sentence\nCzech translation\n\nRules:\n- Keep it simple and natural (A1–A2 level)\n- Use everyday spoken Czech\n- Give 3–6 phrases max\n- No explanations, فقط phrases\n- Do NOT add extra commentary\n\nUser request:\n {{ $json.message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -2240,
+        2112
+      ],
+      "id": "86eb5135-5063-48c7-8256-8262e5ab0136",
+      "name": "AI Agent2",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "google/gemma-3-27b-it:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -2240,
+        2288
+      ],
+      "id": "6a95581d-bb77-49f9-9804-67733480b68e",
+      "name": "OpenRouter Chat Model3",
+      "credentials": {
+        "openRouterApi": {
+          "id": "vq1OPkcH7pI1W471",
+          "name": "OpenRouter account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -3744,
+        1296
+      ],
+      "id": "e6d97b2f-8508-4ae7-8a8e-d0bf4ad49728",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "__CUSTOM_API_CALL__ message": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "__CUSTOM_API_CALL__ message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c135d130-dbd8-4d8f-9964-794630c80c7a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "724c8845368a5b70655ab3f1a28500778f791cb291d2e8027daa5618b55cf14a"
+  },
+  "id": "ueetQdktav123Yfn",
+  "tags": []
+}
